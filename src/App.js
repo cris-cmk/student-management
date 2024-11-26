@@ -36,7 +36,8 @@ function App() {
 
   const deleteStudent = (id) => {
     const filteredStudents = students.filter((student) => student.id !== id);
-    setStudents(filteredStudents);
+    setStudents(filteredStudents); // Update the state
+    saveStudentsToLocalStorage(filteredStudents); // Save the updated list to local storage
   };
 
   return (

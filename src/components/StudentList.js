@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StudentList({ students, deleteStudent }) {
+function StudentList({ students, deleteStudent, setCurrentStudent }) {
   return (
     <div>
       {students.length === 0 ? (
@@ -22,6 +22,12 @@ function StudentList({ students, deleteStudent }) {
                 <td>{student.name}</td>
                 <td>{student.email}</td>
                 <td>
+                  <button
+                    className="btn btn-success btn-sm me-2"
+                    onClick={() => setCurrentStudent(student)}
+                  >
+                    Edit
+                  </button>
                   <button
                     className="btn btn-danger btn-sm"
                     onClick={() => deleteStudent(student.id)}

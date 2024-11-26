@@ -1,22 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function StudentForm({ addStudent }) {
+function StudentForm({ addStudent, updateStudent, currentStudent, students }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (currentStudent) {
+      setName(currentStudent.name);
+      setEmail(currentStudent.email);
+      setIsEditing(true);
+    } else {
+      setName('');
+      setEmail('');
+      setIsEditing(false);
+    }
+  }, [currentStudent]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email) return;
 
-    const newStudent = {
-      id: Date.now(),
-      name,
-      email,
-    };
+    if (!name || !email) {
+      alert('Both name and email are required!');
+      return;
+    }
 
-    addStudent(newStudent);
+    const isDuplicate = students.some(
+      (student) =>
+        student.id !== (currentStudent?.id || null) &&
+        (student.name === name || student.email === email)
+    );
+
+    if (isDuplicate) {
+      alert('Name or Email already exists!');
+      return;
+    }
+
+    const studentData = { id: currentStudent?.id || Date.now(), name, email };
+
+    if (isEditing) {
+      updateStudent(studentData);
+    } else {
+      addStudent(studentData);
+    }
+
     setName('');
     setEmail('');
+    setIsEditing(false);
   };
 
   return (
@@ -41,7 +71,9 @@ function StudentForm({ addStudent }) {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <button type="submit" className="btn btn-primary">Add Student</button>
+      <button type="submit" className="btn btn-primary">
+        {isEditing ? 'Update Student' : 'Add Student'}
+      </button>
     </form>
   );
 }
