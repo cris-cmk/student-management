@@ -25,6 +25,7 @@ function StudentForm({ addStudent, updateStudent, currentStudent, students }) {
       return;
     }
 
+    //dublicate record checker
     const isDuplicate = students.some(
       (student) =>
         student.id !== (currentStudent?.id || null) &&
@@ -72,7 +73,7 @@ function StudentForm({ addStudent, updateStudent, currentStudent, students }) {
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        {isEditing ? 'Update Student' : 'Add Student'}
+        {isEditing ? 'Update Student' : 'Add Student details'}
       </button>
     </form>
   );
