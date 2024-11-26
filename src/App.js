@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import StudentList from './components/StudentList';
 import StudentForm from './components/StudentForm';
+import StudentList from './components/StudentList';
 import { getStudentsFromLocalStorage, saveStudentsToLocalStorage } from './utils/storage';
 
 function App() {
   const [students, setStudents] = useState([]);
+  const [currentStudent, setCurrentStudent] = useState(null);
 
+  // Load students from local storage on initial render
   useEffect(() => {
-    // Load students from local storage on initial render
     const savedStudents = getStudentsFromLocalStorage();
-    setStudents(savedStudents);
+    if (savedStudents.length > 0) {
+      setStudents(savedStudents);
+    }
   }, []);
 
+  // Save students to local storage whenever the state changes
   useEffect(() => {
-    // Save students to local storage whenever they change
-    saveStudentsToLocalStorage(students);
+    if (students.length > 0) {
+      saveStudentsToLocalStorage(students);
+    }
   }, [students]);
 
   const addStudent = (student) => {
@@ -26,6 +31,7 @@ function App() {
       student.id === updatedStudent.id ? updatedStudent : student
     );
     setStudents(updatedList);
+    setCurrentStudent(null); // Clear edit mode
   };
 
   const deleteStudent = (id) => {
@@ -36,11 +42,16 @@ function App() {
   return (
     <div className="container mt-4">
       <h1 className="text-center">Student Management</h1>
-      <StudentForm addStudent={addStudent} />
+      <StudentForm
+        addStudent={addStudent}
+        updateStudent={updateStudent}
+        currentStudent={currentStudent}
+        students={students}
+      />
       <StudentList
         students={students}
-        updateStudent={updateStudent}
         deleteStudent={deleteStudent}
+        setCurrentStudent={setCurrentStudent}
       />
     </div>
   );
