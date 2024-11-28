@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="container mt-4">
-      <h1 className="text-center">Student Management</h1>
+      <h1 className="text-center">Student Management (WEEK 1)</h1>
       <StudentForm
         addStudent={addStudent}
         updateStudent={updateStudent}
