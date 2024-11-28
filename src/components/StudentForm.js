@@ -49,6 +49,7 @@ function StudentForm({ addStudent, updateStudent, currentStudent, students }) {
     setEmail('');
     setIsEditing(false);
   };
+
   return (
     <form onSubmit={handleSubmit} className="mb-4">
       <div className="mb-3">
