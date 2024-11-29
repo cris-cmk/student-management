@@ -5,10 +5,15 @@ This is a simple React application for managing students using Create, Read, Upd
 
 ---
 
+### Live Website
+
+live website is accessible via - https://cris-cmk.github.io/student-management
+
 ## Features
 
 1. **Add Students**:
    - Add a student with a unique name and email.
+
    - Duplicate names or emails are not allowed.
 
 2. **View Students**:
@@ -36,15 +41,19 @@ This is a simple React application for managing students using Create, Read, Upd
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js installed on your machine.
 
 ### Prerequisites
-- Git Repo - https://github.com/cris-cmk/week-1-crud
+
+- Git Repo - https://github.com/cris-cmk/student-management
+
+
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/cris-cmk/week-1-crud.git
-   cd week-1-crud
+   git clone https://github.com/cris-cmk/student-management
+   cd student-management
    npm install
    npm start
